@@ -37,26 +37,26 @@ We’re going to install / build (at time of writing):
 
 Select Ubuntu as the AMI
 
-![AWS EC2 instance creation, AMI selection — UBUNTU 14.04](im0.png "AWS EC2 instance creation, AMI selection — UBUNTU 14.04")
+![AWS EC2 instance creation, AMI selection — UBUNTU 14.04](p1/im0.png "AWS EC2 instance creation, AMI selection — UBUNTU 14.04")
 
 The type of instance we’ll use is the g2.2xlarge, it has a K520 Grid GPU
 
-![AWS EC2 instance creation, GPU selection](im1.png "AWS EC2 instance creation, GPU selection")
+![AWS EC2 instance creation, GPU selection](p1/im1.png "AWS EC2 instance creation, GPU selection")
 
 Add meaningful tags
-
-![AWS EC2 console, instance creation, tags](im2-a.png "AWS EC2 console, instance creation, tags")
+(p1/im
+![AWS EC2 console, instance creation, tags](p1/im2-a.png "AWS EC2 console, instance creation, tags")
 
 Security group, make sure you have these ports open (for TensorBoard and for Jupyter)
 
-![AWS EC2 console, security group for instance](im2.png "AWS EC2 console, security group for instance")
+![AWS EC2 console, security group for instance](p1/im2.png "AWS EC2 console, security group for instance")
 
 If you plan on adding training data, make sure you add an EBS SSD drive. 200GB is a reasonable amount to use
 
-![AWS EC2 console, instance creation HD](im3.png "AWS EC2 console, instance creation HD")
+![AWS EC2 console, instance creation HD](p1/im3.png "AWS EC2 console, instance creation HD")
 
 We can see the instance is running
-![AWS EC2 console](im4.png "AWS EC2 console")
+![AWS EC2 console](p1/im4.png "AWS EC2 console")
 
 We start by updating the OS’s packages.
 
@@ -64,7 +64,7 @@ We start by updating the OS’s packages.
 
 TF requires gcc++ 4.9
 
-![TF https://www.tensorflow.org/versions/r0.9/get_started/os_setup.html](im5.png "TF https://www.tensorflow.org/versions/r0.9/get_started/os_setup.html")
+![TF https://www.tensorflow.org/versions/r0.9/get_started/os_setup.html](p1/im5.png "TF https://www.tensorflow.org/versions/r0.9/get_started/os_setup.html")
 
 	sudo add-apt-repository ppa:ubuntu-toolchain-r/test
 	sudo apt-get update
@@ -77,11 +77,11 @@ Need to install Nvidia GPU driver. Always confirm (of course we know it’s part
 
 	lspci | grep -i nvidia
 
-![NVIDIA GPU](im6.png "NVIDIA GPU")
+![NVIDIA GPU](p1/im6.png "NVIDIA GPU")
 
 Next, let’s install CUDA 7.5 from https://developer.nvidia.com/cuda-downloads
 
-![CUDA 7.5](im7.png "CUDA 7.5")
+![CUDA 7.5](p1/im7.png "CUDA 7.5")
 
 right click on the Download and run
 	
@@ -109,7 +109,7 @@ verify CUDA installation by running
 	sudo reboot
 	nvcc --version
 	
-![CUDA version 7.5.17](im8.png "CUDA version 7.5.17")
+![CUDA version 7.5.17](p1/im8.png "CUDA version 7.5.17")
 
 
 It might install an **OLDER** Nvidie display driver, so searching for nvidia installed packages:
@@ -162,7 +162,7 @@ Next, verify the driver is installed
 
 	nvidia-smi
 
-![nvidia-smi output](im9.png "nvidia-smi output")
+![nvidia-smi output](p1/im9.png "nvidia-smi output")
 
 	cd /usr/local/cuda-7.5/
 	cd samples
@@ -173,9 +173,9 @@ Let’s verify CUDA installation went well.
 	cd /usr/local/cuda-7.5/samples/1_Utilities/deviceQuery
 ./deviceQuery
 
-![nvidia-smi output verify](im10.png "nvidia-smi output verify")
+![nvidia-smi output verify](p1/im10.png "nvidia-smi output verify")
 
-![nvidia-smi output verify](im11.png "nvidia-smi output verify")
+![nvidia-smi output verify](p1/im11.png "nvidia-smi output verify")
 
 Now we’ll install CuDNN, which is the Deep Neural Network framework of Nvidia. It requires registration to Nvidia’s site at:
 
@@ -183,7 +183,7 @@ Now we’ll install CuDNN, which is the Deep Neural Network framework of Nvidia.
 
 then, select as in the image and “cuDNN v5.1 Library for Linux”:
 
-![we choose cuDNN 7.5](im12.png "we choose cuDNN 7.5")
+![we choose cuDNN 7.5](p1/im12.png "we choose cuDNN 7.5")
 
 
 We install the latest which is an RC version (release candidate) as the previous one, had issues with (5.0.x) and V5 brings major speed improvements.
@@ -206,7 +206,7 @@ After installation, verify cuDnn version
 
 	cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2
 
-![cuDNN v5.1.3](im13.png "cuDNN v5.1.3")
+![cuDNN v5.1.3](p1/im13.png "cuDNN v5.1.3")
 
 Now we need to build from source. Why?
 
@@ -241,7 +241,7 @@ you’d want to install v.0.2.2 , not 0.2.2b or any other newer version.
 
 Now we’re going to install MiniConda and install Python 3.5.1, building and installation is going to take place in a virtual environment. We don’t want to bind any system files. In addition we’re going to use *Screen* during the process.
 
-![Anaconda Install](im14.png "Anaconda Install")
+![Anaconda Install](p1/im14.png "Anaconda Install")
 
 
 Download and install MiniConda:
@@ -272,7 +272,7 @@ Then we’ll clone Tensorflow, TF 0.9 requires swig
 
 you’ll be prompted with questions, answer as follows:
 
-![Configuring Tensorflow](im15.png "Configuring Tensorflow")
+![Configuring Tensorflow](p1/im15.png "Configuring Tensorflow")
 
 building TensorFlow:
 
@@ -291,7 +291,7 @@ Let’s verify that TensorFlow is installed successfully:
 
 	python ~/tensorflow/tensorflow/models/image/mnist/convolutional.py
 
-![MNIST running successfully with GPU](im16.png "MNIST running successfully with GPU")
+![MNIST running successfully with GPU](p1/im16.png "MNIST running successfully with GPU")
 
 Press *cmd+alt+d* to detach from the screen.
 
@@ -301,13 +301,13 @@ Next step is using TensorBoard. While you train a model (or not), add TensorBoar
 	tensorboard --logdir=/train/runs/
 
 
-![TensorBoard on 6006](im17.png "TensorBoard on 6006")
+![TensorBoard on 6006](p1/im17.png "TensorBoard on 6006")
 
 Then open your browser in http://<-instance public ip->:6006
 
 The way it looks is as follow:
 
-![TensorBoard](im18.png "TensorBoard")
+![TensorBoard](p1/im18.png "TensorBoard")
 
 Remember that you’ll need to use the SummaryWriter to write to logs.
 
@@ -359,11 +359,11 @@ open your browser and point it to the instance’s public ip at port 8888 such a
 
 when you’ll use your browser make sure to allow access to it:
 
-![Chrome output, make sure to hit “Advanced” and “proceed to…(unsafe)”](im19.png "Chrome output, make sure to hit “Advanced” and “proceed to…(unsafe)”")
+![Chrome output, make sure to hit “Advanced” and “proceed to…(unsafe)”](p1/im19.png "Chrome output, make sure to hit “Advanced” and “proceed to…(unsafe)”")
 
 You’ll need to enter the password you’ve used above to login and then:
 
-![Jupyter main screen](im20.png "Jupyter main screen")
+![Jupyter main screen](p1/im20.png "Jupyter main screen")
 
 That’s it! now you have Jupyter running in a virtual environment, with Python 3.5.1
 

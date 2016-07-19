@@ -6,7 +6,7 @@ Eventually it will also hold the code.
 
 Order:
 
-* [TF\_part\_1.md](tf_part_1.md) - part 1 
+* [TF\_part\_1.md](https://github.com/USF-ML2/TensorFlow/raw/master/TF_part_1.md) - part 1 
 
 
 If you have any question / note/ other, feel free contacting me at:
