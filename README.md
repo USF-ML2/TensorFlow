@@ -1,8 +1,6 @@
 ## TensorFlow
 
-This repository will hold a series of posts in incremental order, for easing into TensorFlow and Deep Neural Networks. I'll try to 
-
-Eventually it will also hold the code.
+This repository will hold a series of posts in incremental order, for easing into TensorFlow and Deep Neural Networks.
 
 Order:
 
